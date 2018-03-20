@@ -1,0 +1,25 @@
+{
+  "name": "base-fixture",
+  "version": "1.0.0",
+  "description": "A simple helper for setting up and tearing down data needed for tests.",
+  "main": "fixture.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bluebird": "3.5.1"
+  },
+  "devDependencies": {
+    "jest": "22.1.4",
+    "sinon": "4.2.2"
+  },
+  "scripts": {
+    "test": "jest --watch --coverage --coverageDirectory='test/reports'"
+  },
+  "keywords": [
+    "test",
+    "fixture"
+  ],
+  "author": "@beardyman",
+  "license": "MIT"
+}
