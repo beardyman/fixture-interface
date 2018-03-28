@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Fixture', ()=>{
+describe('Fixture', () => {
   const sinon = require('sinon');
   let Fixture
     , testFixture
