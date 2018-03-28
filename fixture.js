@@ -3,7 +3,7 @@
 const Promise = require('bluebird');
 
 /**
- * Helper for
+ * Helper for throwing not implemented errors for functions that are expected to be overridden
  * @param name
  */
 function notImplemented(name) {
