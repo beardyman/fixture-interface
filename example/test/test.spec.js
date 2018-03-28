@@ -3,11 +3,10 @@
 const CarFx = require('./fixtures/car.fx');
 const _ = require('lodash');
 
-describe('Full test', ()=> {
+describe('Full test', () => {
   let carFx;
 
-
-  describe('test', function () {
+  describe('test', () => {
 
     beforeAll(() => {
       carFx = new CarFx();

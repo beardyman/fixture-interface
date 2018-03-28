@@ -3,18 +3,17 @@
 const Fx = require('../../../fixture');
 const Aws = require('aws-sdk');
 const Promise = require('bluebird');
-const config = require('config');
 
 // base class for interfacing with aws's dynamodb
 class DynamoFx extends Fx {
 
-  constructor(tableName) {
+  constructor(connConfig, tableName) {
     super();
 
     this.tableName = tableName;
 
     // setup dynamo connection info
-    const client = new Aws.DynamoDB.DocumentClient(config.dynamo);
+    const client = new Aws.DynamoDB.DocumentClient(connConfig);
     Promise.promisifyAll(client);
     this.db = client;
   }
