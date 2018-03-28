@@ -2,17 +2,38 @@
 
 const Promise = require('bluebird');
 
+/**
+ * Helper for
+ * @param name
+ */
+function notImplemented(name) {
+  throw new Error(`${name} must be implmented in your data fixture`);
+}
+
 class Fixture {
   /**
-   * @desc Creates a distinct dataset for a test or test suite each callback (insert and remove) must return a promise.
-   *
-   * @param insert {Function} - A method that is capable of adding a single data object to the data source.  Must return a Promise.
-   * @param remove {Function} - A method that is capable of removing a single data object from the data source.  Must return a Promise.
+   * @desc Creates a distinct dataset for a test or test suite. Expects _insert and _remove to be overridden
    */
-  constructor(insert, remove) {
-    this._insert = insert;
-    this._delete = remove;
+  constructor() {
     this.data = [];
+  }
+
+  /**
+   * @desc Inserts one record into the data source. Intended to be overridden.
+   *
+   * @private
+   */
+  _insert() {
+    notImplemented('_insert')
+  }
+
+  /**
+   * @desc Removes one record from the data source. Intended to be overridden.
+   *
+   * @private
+   */
+  _remove() {
+    notImplemented('_remove')
   }
 
   /**
@@ -43,7 +64,7 @@ class Fixture {
    * @returns {Promise}
    */
   cleanup() {
-    return Promise.map(this.data, this._delete).then(()=> this.data = []);
+    return Promise.map(this.data, (item)=>this._remove(item)).then(()=> this.data = []);
   }
 }
 

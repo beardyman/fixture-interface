@@ -1,7 +1,7 @@
 {
-  "name": "base-fixture",
+  "name": "fixture-interface",
   "version": "1.0.0",
-  "description": "A simple helper for setting up and tearing down data needed for tests.",
+  "description": "A simple interface to make helpers for setting up and tearing down data needed for tests.",
   "main": "fixture.js",
   "directories": {
     "test": "test"
@@ -14,7 +14,8 @@
     "sinon": "4.2.2"
   },
   "scripts": {
-    "test": "jest --watch --coverage --coverageDirectory='test/reports'"
+    "test": "jest test/*.spec.js --watch --coverage --coverageDirectory='test/reports'",
+    "sample-test": "jest sample-test --watch --coverage --coverageDirectory='test/reports'"
   },
   "keywords": [
     "test",

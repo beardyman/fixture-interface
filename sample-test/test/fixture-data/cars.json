@@ -1,0 +1,26 @@
+[
+  {
+    "year": 2000,
+    "make": "Pontiac",
+    "model": "Grand Prix",
+    "reviews": [
+      {
+        "author": "Rick Sanchez",
+        "rating": -1,
+        "review": "Whatever you say Stone Cold Steve Austin."
+      }
+    ]
+  },
+  {
+    "year": 2010,
+    "make": "Jeep",
+    "model": "Grand Cherokee",
+    "reviews": [
+      {
+        "author": "Morty Smith",
+        "rating": 5,
+        "review": "Oh Geeze man!"
+      }
+    ]
+  }
+]

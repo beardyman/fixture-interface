@@ -17,17 +17,41 @@ describe('Fixture', ()=>{
   });
 
   describe('constructor', () => {
+    let constructorFixture;
+
+    beforeEach(()=>{
+      constructorFixture = new Fixture();
+    });
+
     it('should register the insert and remove methods', () => {
-      const constructorFixture = new Fixture(insertStub, removeStub);
-      expect(constructorFixture._insert).toBe(insertStub);
-      expect(constructorFixture._delete).toBe(removeStub);
       expect(constructorFixture.data).toEqual([]);
+    });
+
+    it('shouldn\'t have an initial _insert', () => {
+      try {
+        constructorFixture._insert();
+        throw new Error('why here?');
+      } catch (e) {
+        expect(e.message).toBe('_insert must be implmented in your data fixture')
+      }
+    });
+
+
+    it('shouldn\'t have an initial _remove', () => {
+      try {
+        constructorFixture._remove();
+        throw new Error('why here?');
+      } catch (e) {
+        expect(e.message).toBe('_remove must be implmented in your data fixture')
+      }
     });
   });
 
   describe('methods', ()=> {
     beforeEach(() => {
-      testFixture = new Fixture(insertStub, removeStub);
+      testFixture = new Fixture();
+      testFixture._insert = insertStub;
+      testFixture._remove = removeStub;
     });
 
     it('should invoke invoke insert for each item passed to provision', () => {
