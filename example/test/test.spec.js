@@ -3,7 +3,7 @@
 const CarFx = require('./fixtures/car.fx');
 const _ = require('lodash');
 
-describe('combined test', ()=> {
+describe('Full test', ()=> {
   let carFx;
 
 
@@ -14,7 +14,7 @@ describe('combined test', ()=> {
       // creates 100 records via fixture
       return carFx.provision(_.times(100, (n) => ({
         year: n,
-        make: 'rick',
+        make: 'Simple Rick\'s',
         model: 'trash from the garage',
         description: 'this is a test'
       })))
@@ -36,7 +36,7 @@ describe('combined test', ()=> {
       const store = require('../data-store/memory');
       expect(_.values(store).length).toBe(102);
       // some spot checking
-      expect(store['0;rick;trash from the garage'].year).toBe(0);
+      expect(store['0;Simple Rick\'s;trash from the garage'].year).toBe(0);
       expect(store['2000;Pontiac;Grand Prix'].reviews[0].author).toBe('Rick Sanchez');
       expect(store['2010;Jeep;Grand Cherokee'].reviews[0].author).toBe('Morty Smith');
     });
