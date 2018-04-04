@@ -20,20 +20,16 @@ class Fixture {
 
   /**
    * @desc Inserts one record into the data source. Intended to be overridden.
-   *
-   * @private
    */
-  _insert() {
-    notImplemented('_insert')
+  insert() {
+    notImplemented('insert')
   }
 
   /**
    * @desc Removes one record from the data source. Intended to be overridden.
-   *
-   * @private
    */
-  _remove() {
-    notImplemented('_remove')
+  remove() {
+    notImplemented('remove')
   }
 
   /**
@@ -44,7 +40,7 @@ class Fixture {
    */
   provision(jsonArray){
     return Promise.map(jsonArray, (dataObj)=>
-      this._insert(dataObj).then(()=>
+      this.insert(dataObj).then(()=>
         this.data.push(dataObj)
       ));
   }
@@ -64,7 +60,7 @@ class Fixture {
    * @returns {Promise}
    */
   cleanup() {
-    return Promise.map(this.data, (item)=>this._remove(item)).then(()=> this.data = []);
+    return Promise.map(this.data, (item)=>this.remove(item)).then(()=> this.data = []);
   }
 }
 

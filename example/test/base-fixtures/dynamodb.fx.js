@@ -18,11 +18,11 @@ class DynamoFx extends Fx {
     this.db = client;
   }
 
-  _insert(item) {
+  insert(item) {
     this.db.putAsync({TableName: this.tableName, Item: item});
   }
 
-  _remove(key) {
+  remove(key) {
     this.db.deleteAsync({TableName: this.tableName, Key: key});
   }
 }

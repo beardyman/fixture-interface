@@ -12,12 +12,12 @@ class MemoryFx extends Fx {
     super();
   }
 
-  _insert(item) {
+  insert(item) {
     mem[item.hash_key] = item;
     return Promise.resolve();
   }
 
-  _remove(key) {
+  remove(key) {
     delete mem[key.hash_key];
     return Promise.resolve();
   }

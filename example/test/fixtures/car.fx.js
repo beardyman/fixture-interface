@@ -7,14 +7,14 @@ class carFx extends MemoryFx {
     super(/*config.carTableName*/);
   }
 
-  _insert(item) {
+  insert(item) {
     // create identifier key
     item.hash_key = `${item.year};${item.make};${item.model}`;
-    return super._insert(item);
+    return super.insert(item);
   }
 
-  _remove(item) {
-    return super._remove({hash_key: item.hash_key});
+  remove(item) {
+    return super.remove({hash_key: item.hash_key});
   }
 }
 

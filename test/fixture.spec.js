@@ -27,22 +27,22 @@ describe('Fixture', () => {
       expect(constructorFixture.data).toEqual([]);
     });
 
-    it('shouldn\'t have an initial _insert', () => {
+    it('shouldn\'t have an initial insert', () => {
       try {
-        constructorFixture._insert();
+        constructorFixture.insert();
         throw new Error('why here?');
       } catch (e) {
-        expect(e.message).toBe('_insert must be implmented in your data fixture')
+        expect(e.message).toBe('insert must be implmented in your data fixture')
       }
     });
 
 
-    it('shouldn\'t have an initial _remove', () => {
+    it('shouldn\'t have an initial remove', () => {
       try {
-        constructorFixture._remove();
+        constructorFixture.remove();
         throw new Error('why here?');
       } catch (e) {
-        expect(e.message).toBe('_remove must be implmented in your data fixture')
+        expect(e.message).toBe('remove must be implmented in your data fixture')
       }
     });
   });
@@ -50,8 +50,8 @@ describe('Fixture', () => {
   describe('methods', ()=> {
     beforeEach(() => {
       testFixture = new Fixture();
-      testFixture._insert = insertStub;
-      testFixture._remove = removeStub;
+      testFixture.insert = insertStub;
+      testFixture.remove = removeStub;
     });
 
     it('should invoke invoke insert for each item passed to provision', () => {
