@@ -1,6 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
+const _ = require('lodash');
 
 /**
  * Helper for throwing not implemented errors for functions that are expected to be overridden
@@ -39,7 +40,7 @@ class Fixture {
    * @returns {Promise} - A promise that resolves with an array of the resulting insert resolutions.
    */
   provision(jsonArray){
-    return Promise.map(jsonArray, (dataObj)=>
+    return Promise.map(_.cloneDeep(jsonArray), (dataObj)=>
       this.insert(dataObj).then(()=>
         this.data.push(dataObj)
       ));
