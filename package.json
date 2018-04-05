@@ -7,7 +7,8 @@
     "test": "test"
   },
   "dependencies": {
-    "bluebird": "3.5.1"
+    "bluebird": "3.5.1",
+    "lodash": "4.17.5"
   },
   "devDependencies": {
     "jest": "22.1.4",
