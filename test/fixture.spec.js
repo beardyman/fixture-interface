@@ -1,15 +1,13 @@
 'use strict';
 
+const { expect } = require('chai');
+const sinon = require('sinon');
+const Fixture = require('../fixture');
+
 describe('Fixture', () => {
-  const sinon = require('sinon');
-  let Fixture
-    , testFixture
+  let testFixture
     , insertStub
     , removeStub;
-
-  beforeAll(()=>{
-    Fixture = require('../fixture');
-  });
 
   beforeEach(() => {
     insertStub = sinon.stub().resolves('hi');
@@ -24,7 +22,7 @@ describe('Fixture', () => {
     });
 
     it('should register the insert and remove methods', () => {
-      expect(constructorFixture.data).toEqual([]);
+      expect(constructorFixture.data).to.deep.equal([]);
     });
 
     it('shouldn\'t have an initial insert', () => {
@@ -32,7 +30,7 @@ describe('Fixture', () => {
         constructorFixture.insert();
         throw new Error('why here?');
       } catch (e) {
-        expect(e.message).toBe('insert must be implmented in your data fixture')
+        expect(e.message).to.equal('insert must be implemented in your data fixture')
       }
     });
 
@@ -42,7 +40,7 @@ describe('Fixture', () => {
         constructorFixture.remove();
         throw new Error('why here?');
       } catch (e) {
-        expect(e.message).toBe('remove must be implmented in your data fixture')
+        expect(e.message).to.equal('remove must be implemented in your data fixture')
       }
     });
   });
@@ -56,25 +54,25 @@ describe('Fixture', () => {
 
     it('should invoke invoke insert for each item passed to provision', () => {
       return testFixture.provision([1, 2, 3]).then((res)=>{
-        expect(res[0]).toBe(1);
-        expect(res[1]).toBe(2);
-        expect(res[2]).toBe(3);
-        expect(insertStub.callCount).toBe(3);
-        expect(testFixture.data.length).toBe(3);
+        expect(res[0]).to.equal(1);
+        expect(res[1]).to.equal(2);
+        expect(res[2]).to.equal(3);
+        expect(insertStub.callCount).to.equal(3);
+        expect(testFixture.data.length).to.equal(3);
       })
     });
 
     it('should add an object to the data collection', () => {
-      expect(testFixture.addData(1)).toBe(1);
-      expect(testFixture.data.length).toBe(1);
+      expect(testFixture.addData(1)).to.equal(1);
+      expect(testFixture.data.length).to.equal(1);
     });
 
     it('should remove all data', () => {
       testFixture.data.push(1,2,3);
 
       return testFixture.cleanup().then(()=> {
-        expect(removeStub.callCount).toBe(3);
-        expect(testFixture.data.length).toBe(0);
+        expect(removeStub.callCount).to.equal(3);
+        expect(testFixture.data.length).to.equal(0);
       });
     });
   });

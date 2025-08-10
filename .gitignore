@@ -1,2 +1,6 @@
-reports
-node_modules
+reports/
+node_modules/
+dist/
+.nyc_output/
+*.local*
+

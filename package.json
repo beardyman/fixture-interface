@@ -2,21 +2,41 @@
   "name": "fixture-interface",
   "version": "1.0.0",
   "description": "A simple interface to make helpers for setting up and tearing down data needed for tests.",
-  "main": "fixture.js",
+  "main": "dist/cjs/fixture.js",
+  "module": "dist/esm/fixture.js",
+  "types": "dist/fixture.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/fixture.js",
+      "require": "./dist/cjs/fixture.js",
+      "types": "./dist/fixture.d.ts"
+    }
+  },
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "bluebird": "3.5.1",
-    "lodash": "4.17.5"
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "jest": "22.1.4",
-    "sinon": "4.2.2"
+    "mocha": "^10.2.0",
+    "chai": "^4.3.7",
+    "sinon": "^21.0.0",
+    "nyc": "^15.1.0",
+    "typescript": "^5.0.0"
   },
   "scripts": {
-    "test": "jest test/*.spec.js --watch --coverage --coverageDirectory='test/reports'",
-    "example": "jest example/test --watch --coverage --coverageDirectory='example/test/reports'"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:cjs": "mkdir -p dist/cjs && cp fixture.js dist/cjs/fixture.js",
+    "build:esm": "node scripts/build-esm.js",
+    "build:types": "node scripts/generate-dts.js",
+    "test": "npm run build && nyc --reporter=html --reporter=text --reporter=lcov --report-dir=test/reports mocha test/*.spec.js",
+    "open:cov": "open test/reports/index.html",
+    "example": "npm run build && nyc --reporter=html --reporter=text --reporter=lcov --report-dir=example/test/reports mocha example/test/*.spec.js",
+    "open:example-cov": "open example/test/reports/index.html",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "test",

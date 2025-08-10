@@ -5,39 +5,46 @@ const _ = require('lodash');
 
 /**
  * Helper for throwing not implemented errors for functions that are expected to be overridden
- * @param name
+ * @param {string} name - Name of the method that must be implemented
+ * @throws {Error} Always throws an error indicating the method must be implemented
  */
 function notImplemented(name) {
-  throw new Error(`${name} must be implmented in your data fixture`);
+  throw new Error(`${name} must be implemented in your data fixture`);
 }
 
 class Fixture {
   /**
-   * @desc Creates a distinct dataset for a test or test suite. Expects _insert and _remove to be overridden
+   * Creates a distinct dataset for a test or test suite. Expects insert and remove to be overridden
    */
   constructor() {
     this.data = [];
   }
 
   /**
-   * @desc Inserts one record into the data source. Intended to be overridden.
+   * Inserts one record into the data source. Intended to be overridden.
+   * @param {any} data - Data object to insert into the data store
+   * @returns {Promise<void>} Promise that resolves when insert is complete
+   * @throws {Error} Throws error if not implemented by subclass
    */
-  insert() {
+  insert(data) {
     notImplemented('insert')
   }
 
   /**
-   * @desc Removes one record from the data source. Intended to be overridden.
+   * Removes one record from the data source. Intended to be overridden.
+   * @param {any} data - Identifying data for the record to remove from the data store
+   * @returns {Promise<void>} Promise that resolves when removal is complete
+   * @throws {Error} Throws error if not implemented by subclass
    */
-  remove() {
+  remove(data) {
     notImplemented('remove')
   }
 
   /**
-   * @desc Takes a given data set and uses the insert function to provision it.
+   * Takes a given data set and uses the insert function to provision it.
    *
-   * @param jsonArray {Array} - an array of data objects to be provisioned
-   * @returns {Promise} - A promise that resolves with an array of the resulting insert resolutions.
+   * @param {any[]} jsonArray - An array of data objects to be provisioned
+   * @returns {Promise<any[]>} A promise that resolves with an array of the provisioned data objects
    */
   provision(jsonArray){
     return Promise.map(_.cloneDeep(jsonArray), (dataObj)=>
@@ -47,18 +54,20 @@ class Fixture {
   }
 
   /**
-   * @desc A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when `.cleanup` is called.
+   * A convenience method for adding data that is generated during the execution of a test. Any data added with this method will be cleaned up when cleanup is called.
    *
-   * @param data {Object}
+   * @param {any} data - Data object to track for cleanup
+   * @returns {number} The new length of the data array after adding the item
    */
   addData(data) {
     return this.data.push(data);
   }
 
   /**
-   * @desc Clears data by invoking the remove method for each object that was previously provisioned or added.
+   * Clears data by invoking the remove method for each object that was previously provisioned or added.
+   * Also clears the internal data array.
    *
-   * @returns {Promise}
+   * @returns {Promise<void>} A promise that resolves when all data has been removed
    */
   cleanup() {
     return Promise.map(this.data, (item)=>this.remove(item)).then(()=> this.data = []);
