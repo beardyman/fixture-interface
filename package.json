@@ -20,10 +20,10 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "mocha": "^10.2.0",
     "chai": "^4.3.7",
-    "sinon": "^21.0.0",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
+    "sinon": "^21.0.0",
     "typescript": "^5.0.0"
   },
   "scripts": {
