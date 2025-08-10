@@ -32,7 +32,7 @@
     "build:cjs": "mkdir -p dist/cjs && cp fixture.js dist/cjs/fixture.js",
     "build:esm": "node scripts/build-esm.js",
     "build:types": "node scripts/generate-dts.js",
-    "test": "npm run build && nyc --reporter=html --reporter=text --reporter=lcov --report-dir=test/reports mocha test/*.spec.js",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov --report-dir=test/reports mocha test/*.spec.js",
     "open:cov": "open test/reports/index.html",
     "example": "npm run build && nyc --reporter=html --reporter=text --reporter=lcov --report-dir=example/test/reports mocha example/test/*.spec.js",
     "open:example-cov": "open example/test/reports/index.html",

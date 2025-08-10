@@ -13,12 +13,7 @@ function notImplemented(name) {
 }
 
 class Fixture {
-  /**
-   * Creates a distinct dataset for a test or test suite. Expects insert and remove to be overridden
-   */
-  constructor() {
-    this.data = [];
-  }
+  data = [];
 
   /**
    * Inserts one record into the data source. Intended to be overridden.
